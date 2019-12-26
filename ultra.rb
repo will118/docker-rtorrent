@@ -42,7 +42,7 @@ DESTINATION_FULL_PATH = "/plexdata/#{DESTINATION_FOLDER_NAME}"
 # move whole folder because its easier for plex
 move_file(SOURCE_PATH, DESTINATION_FULL_PATH)
 
-$stdout.write "moved: #{SOURCE_PATH}"
+$stdout.write "moved: #{SOURCE_PATH} to #{DESTINATION_FULL_PATH}"
 
 # delete the source
 `rm -rf #{SOURCE_PATH}`
