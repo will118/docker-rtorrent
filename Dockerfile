@@ -1,5 +1,4 @@
-FROM alpine:3.10
-LABEL maintainer="looselyrigorous <looselyrigorous@gmail.com>"
+FROM alpine:3.11
 ARG BUILD_CORES
 
 # Install rtorrent and su-exec
@@ -30,6 +29,8 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
  && apk add \
     su-exec \
     rtorrent \
+    ruby \
+    unrar \
  && cd /tmp \
  && git clone https://github.com/mirror/xmlrpc-c.git \
  && cd /tmp/xmlrpc-c/advanced && ./configure && make -j ${NB_CORES} && make install \
@@ -50,6 +51,9 @@ VOLUME ["/config", "/session", "/socket", "/watch", "/downloads"]
 
 # Copy distribution rTorrent config for bootstrapping and entrypoint
 COPY ./root /
+
+RUN mkdir /scripts
+COPY ultra.rb /scripts
 
 ENTRYPOINT ["/entrypoint"]
 
