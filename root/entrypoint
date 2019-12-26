@@ -22,6 +22,7 @@ chown "$PUID:$PGID" \
 	/var/log/rtorrent-info.log
 
 if [ "$1" = 'rtorrent' ]; then
+	chmod -R $PUID:$PGID /scripts
 	exec su-exec $PUID:$PGID "$@"
 fi
 
