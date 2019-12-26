@@ -18,6 +18,8 @@ DESTINATION_FOLDER_NAME = ARGV[0]
 SOURCE_PATH = ARGV[1]
 TORRENT_HASH = ARGV[2]
 
+$stdout.write "ultra: #{SOURCE_PATH}"
+
 # tell server to delete torrent from rtorrent
 rtorrent_uri = URI('http://arr:3333/')
 Net::HTTP.post_form(rtorrent_uri, hash: TORRENT_HASH)
@@ -26,6 +28,8 @@ Net::HTTP.post_form(rtorrent_uri, hash: TORRENT_HASH)
 Dir.glob("#{SOURCE_PATH}/**/*.rar")
   .select { |x| File.file? x }
   .each { |path| puts `unrar e -o- "#{path}" "#{File.dirname path}"` }
+
+$stdout.write "unrar'd: #{SOURCE_PATH}"
 
 # delete rars
 Dir.glob("#{SOURCE_PATH}/**/*.r??")
@@ -37,6 +41,8 @@ DESTINATION_FULL_PATH = "/plexdata/#{DESTINATION_FOLDER_NAME}"
 
 # move whole folder because its easier for plex
 move_file(SOURCE_PATH, DESTINATION_FULL_PATH)
+
+$stdout.write "moved: #{SOURCE_PATH}"
 
 # delete the source
 `rm -rf #{SOURCE_PATH}`
