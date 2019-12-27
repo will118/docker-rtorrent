@@ -47,7 +47,7 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
     ln -sf /dev/stdout /var/log/rtorrent-info.log && \
     ln -sf /dev/stderr /var/log/rtorrent-error.log
 
-VOLUME ["/config", "/session", "/socket", "/watch", "/downloads"]
+VOLUME ["/config", "/session", "/socket", "/watch", "/downloads", "/plexdata"]
 
 # Copy distribution rTorrent config for bootstrapping and entrypoint
 COPY ./root /
