@@ -43,6 +43,7 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
       /socket \
       /watch/load \
       /watch/start \
+      /plexdata \
       /downloads && \
     ln -sf /dev/stdout /var/log/rtorrent-info.log && \
     ln -sf /dev/stderr /var/log/rtorrent-error.log
